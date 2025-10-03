@@ -1,3 +1,12 @@
+export interface Country {
+    id: string,
+    name: string,
+    continent: string,
+    flagUrl: string,
+    independenceYear: number,
+    motto: string
+}
+
 export interface City {
   id: string;
   name: string;
