@@ -54,7 +54,7 @@ main();
 async function viewAllData() {
     const dataCity = await getCityInfo();
     const dataCountry = await getCountryInfo();
-
+    console.log()
     dataCity.forEach(el => {
         console.log(`${el.name} (${el.id})`)
     });
