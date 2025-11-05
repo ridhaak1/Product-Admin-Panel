@@ -4,12 +4,15 @@
   "description": "## Installation",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "start": "nodemon app.ts"
   },
   "dependencies": {
+    "ejs": "^3.1.10",
+    "express": "^5.1.0",
     "readline-sync": "^1.4.10"
   },
   "devDependencies": {
+    "@types/express": "^5.0.4",
     "@types/readline-sync": "^1.4.8"
   },
   "keywords": [],

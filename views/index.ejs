@@ -1,0 +1,43 @@
+<%- include("partials/navbar") %>
+<main>
+  <form action="#">
+    <div class="field is-grouped">
+    <p class="control is-expanded">
+    <input class="input" type="search" name="search" id="search" placeholder="search 🔍">
+    </p>
+    <p class="control">
+    <button class="button is-info" type="submit">🔍</button>
+    </p>
+    </div>
+  </form>
+<table class="table-modern">
+    <thead>
+        <tr>
+            <th><button>Name ▲</button></th>
+            <th><button>Found Date ▲</button></th>
+            <th><button>Id</button></th>
+            <th><button>Population ▲</button></th>
+            <th><button>Is Capital</button></th>
+            <th><button>Action</button></th>
+        </tr>
+    </thead>
+    <tbody>
+        <% cities.forEach(city => { %>
+        <tr>
+          <td data-label="Name">
+                <figure class="image is-32x32">
+                  <img class="is-rounded" src="<%= city.imageUrl %>" alt="City Image">
+                </figure>
+               <%= city.name %>
+          </td>
+          <td data-label="Found Date"><%= city.foundedDate %></td>
+          <td data-label="Id"><%= city.id %></td>
+          <td data-label="Population"><%= city.population %></td>
+          <td data-label="Is Capital"><%= city.isCapital %></td>
+          <td data-label="Action"><a href="details/<%= city.id %>" target="_blank">View details</a></td>
+        </tr>
+        <% }); %>
+    </tbody>
+</table>
+</main>
+<%- include("partials/footer") %>

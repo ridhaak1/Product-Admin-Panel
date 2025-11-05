@@ -1,0 +1,25 @@
+<%- include("partials/navbar") %>
+<div class="details-container">
+    <img src="<%= city.imageUrl %>" alt="<%= city.name %>">
+    <h1 class="cityName"><%= city.name %></h1>
+    <p class="cityDescr"><%= city.description %></p>
+  </div>
+
+  <table class="table-modern">
+    <thead>
+      <tr>
+        <th>Attribute</th>
+        <th>Value</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr><td>ID</td><td><%= city.id %></td></tr>
+      <tr><td>Region Type</td><td><%= city.regionType %></td></tr>
+      <tr><td>Population</td><td><%= city.population %></td></tr>
+      <tr><td>Is Capital?</td><td><%= city.isCapital %></td></tr>
+      <tr><td>Founded Date</td><td><%= city.foundedDate %></td></tr>
+      <tr><td>Country ID</td><td><%= city.countryid %></td></tr>
+      <tr><td>Landmarks</td><td><%= city.landmarks %></td></tr>
+    </tbody>
+</table>
+<%- include("partials/footer") %>

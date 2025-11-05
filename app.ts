@@ -1,5 +1,11 @@
 import * as rl from 'readline-sync';
 import type { Country, City } from './types';
+import express from "express";
+
+const app = express();
+app.set("view engine", "ejs");
+app.use(express.static("public"));
+
 
 async function getCityInfo():Promise<City[]>{
     try {
@@ -20,63 +26,78 @@ async function getCountryInfo():Promise<Country[]> {
     }
 }
 
-async function main(){
-    console.log("Welcome to the JSON data viewer!")
-    console.log();
-    let status = true;
-    while (status){
-        console.log("1. View all Data")
-        console.log("2. Filter by ID")
-        console.log("3. Exit")
+app.get("/", async (req, res)=>{
+    const cities = await getCityInfo();
+    res.render("index.ejs", {cities})
+})
 
-        const choice = rl.questionInt("Please enter your choice: ")
+app.get("/details/:id", async (req, res)=>{
+    const cities = await getCityInfo();
+    const id = req.params.id;
+    const city = cities.find(c => c.id === id);
+    res.render("details.ejs", {city})
+})
 
-        switch (choice){
-            case 1:
-                 await viewAllData();
-                  console.log();
-                break;
-            case 2:
-                 await filterdData();
-                 break;
-            case 3: 
-                 status = false;
-                 break;
-            default: console.log("Please enter a valid number;")
-            break;
+app.listen(5000, ()=>{
+    console.log("Server is running ...")
+})
+
+// async function main(){
+//     console.log("Welcome to the JSON data viewer!")
+//     console.log();
+//     let status = true;
+//     while (status){
+//         console.log("1. View all Data")
+//         console.log("2. Filter by ID")
+//         console.log("3. Exit")
+
+//         const choice = rl.questionInt("Please enter your choice: ")
+
+//         switch (choice){
+//             case 1:
+//                  await viewAllData();
+//                   console.log();
+//                 break;
+//             case 2:
+//                  await filterdData();
+//                  break;
+//             case 3: 
+//                  status = false;
+//                  break;
+//             default: console.log("Please enter a valid number;")
+//             break;
 
 
-        }
-    }
-}
-main();
+//         }
+//     }
+// }
+// main();
 
-async function viewAllData() {
-    const dataCity = await getCityInfo();
-    const dataCountry = await getCountryInfo();
-    console.log()
-    dataCity.forEach(el => {
-        console.log(`${el.name} (${el.id})`)
-    });
+// async function viewAllData() {
+//     const dataCity = await getCityInfo();
+//     const dataCountry = await getCountryInfo();
+//     console.log()
+//     dataCity.forEach(el => {
+//         console.log(`${el.name} (${el.id})`)
+//     });
     
-}
+// }
 
-async function filterdData(){
-    const dataCity = await getCityInfo();
-    const dataCountry = await getCountryInfo();
+// async function filterdData(){
+//     const dataCity = await getCityInfo();
+//     const dataCountry = await getCountryInfo();
 
-    const choiceId = rl.question("Please enter the ID you want to filter by: ")
-    const choiceData = dataCity.find(el => el.id === choiceId)
-    console.log(`
-        - ${choiceData?.name} (${choiceData?.id})
-        - Description: ${choiceData?.description}
-        - Population: ${choiceData?.population}
-        - Is Capital: ${choiceData?.isCapital}
-        - FoundedDate: ${choiceData?.foundedDate}
-        - ImageUrl: ${choiceData?.imageUrl}
-        - RegionType: ${choiceData?.regionType}
-        - Landmarks: ${choiceData?.landmarks}
-        - Countryid: ${choiceData?.countryid}
-        `)
-}
-
+//     const choiceId = rl.question("Please enter the ID you want to filter by: ")
+//     const choiceData = dataCity.find(el => el.id === choiceId)
+//     console.log(`
+//         - ${choiceData?.name} (${choiceData?.id})
+//         - Description: ${choiceData?.description}
+//         - Population: ${choiceData?.population}
+//         - Is Capital: ${choiceData?.isCapital}
+//         - FoundedDate: ${choiceData?.foundedDate}
+//         - ImageUrl: ${choiceData?.imageUrl}
+//         - RegionType: ${choiceData?.regionType}
+//         - Landmarks: ${choiceData?.landmarks}
+//         - Countryid: ${choiceData?.countryid}
+//         `)
+// }
