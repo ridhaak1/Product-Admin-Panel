@@ -28,7 +28,32 @@ async function getCountryInfo():Promise<Country[]> {
 
 app.get("/", async (req, res)=>{
     const cities = await getCityInfo();
-    res.render("index.ejs", {cities})
+    const search = req.query.search?.toString().toLocaleLowerCase() || "";
+    const sortField = req.query.sortField;
+    const order = req.query.order || "asc";
+    let sortedCities = [...cities];
+    if(search){
+        sortedCities = sortedCities.filter(c => c.name.toLocaleLowerCase().includes(search));
+    }
+    if(sortField === "name"){
+        order === "asc" ? sortedCities.sort((a,b)=> a.name.localeCompare(b.name)) :
+        sortedCities.sort((a,b)=> b.name.localeCompare(a.name))
+    }
+    if(sortField ==="foundDate") {
+        sortedCities.sort((a,b)=> {
+            const dateA = new Date(a.foundedDate);
+            const dateB = new Date(b.foundedDate);
+            const timeA = dateA.getTime();
+            const timeB = dateB.getTime();
+
+            return order === "asc" ? timeA - timeB : timeB - timeA
+        });
+    }
+    if(sortField === "population"){
+        sortedCities.sort((a,b) => 
+        order=== "asc" ? a.population - b.population : b.population - a.population)
+    }
+    res.render("index.ejs", {cities: sortedCities, search, currentSort: sortField, currentOrder: order})
 })
 
 app.get("/details/:id", async (req, res)=>{
@@ -41,63 +66,3 @@ app.get("/details/:id", async (req, res)=>{
 app.listen(5000, ()=>{
     console.log("Server is running ...")
 })
-
-// async function main(){
-//     console.log("Welcome to the JSON data viewer!")
-//     console.log();
-//     let status = true;
-//     while (status){
-//         console.log("1. View all Data")
-//         console.log("2. Filter by ID")
-//         console.log("3. Exit")
-
-//         const choice = rl.questionInt("Please enter your choice: ")
-
-//         switch (choice){
-//             case 1:
-//                  await viewAllData();
-//                   console.log();
-//                 break;
-//             case 2:
-//                  await filterdData();
-//                  break;
-//             case 3: 
-//                  status = false;
-//                  break;
-//             default: console.log("Please enter a valid number;")
-//             break;
-
-
-//         }
-//     }
-// }
-// main();
-
-// async function viewAllData() {
-//     const dataCity = await getCityInfo();
-//     const dataCountry = await getCountryInfo();
-//     console.log()
-//     dataCity.forEach(el => {
-//         console.log(`${el.name} (${el.id})`)
-//     });
-    
-// }
-
-// async function filterdData(){
-//     const dataCity = await getCityInfo();
-//     const dataCountry = await getCountryInfo();
-
-//     const choiceId = rl.question("Please enter the ID you want to filter by: ")
-//     const choiceData = dataCity.find(el => el.id === choiceId)
-//     console.log(`
-//         - ${choiceData?.name} (${choiceData?.id})
-//         - Description: ${choiceData?.description}
-//         - Population: ${choiceData?.population}
-//         - Is Capital: ${choiceData?.isCapital}
-//         - FoundedDate: ${choiceData?.foundedDate}
-//         - ImageUrl: ${choiceData?.imageUrl}
-//         - RegionType: ${choiceData?.regionType}
-//         - Landmarks: ${choiceData?.landmarks}
-//         - Countryid: ${choiceData?.countryid}
-//         `)
-// }

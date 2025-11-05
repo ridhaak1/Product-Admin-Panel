@@ -3,7 +3,7 @@
   <form action="#">
     <div class="field is-grouped">
     <p class="control is-expanded">
-    <input class="input" type="search" name="search" id="search" placeholder="search 🔍">
+    <input class="input" type="search" name="search" value="<%= search || '' %>" placeholder="search 🔍">
     </p>
     <p class="control">
     <button class="button is-info" type="submit">🔍</button>
@@ -13,10 +13,28 @@
 <table class="table-modern">
     <thead>
         <tr>
-            <th><button>Name ▲</button></th>
-            <th><button>Found Date ▲</button></th>
+          <form method="get" action="">
+            <th>
+              <input type="hidden" name="sortField" value="name">
+              <input type="hidden" name="order" value="<%= (currentOrder ==='asc')? 'desc' : 'asc' %>">
+              <button type="submit">Name <%= (currentOrder==='asc') ? '▲' : '▼' %></button>
+            </th>
+            </form>
+            <form method="get" action="">
+            <th>
+              <input type="hidden" name="sortField" value="foundDate">
+              <input type="hidden" name="order" value="<%= (currentOrder==='asc')? 'desc' : 'asc' %>">
+              <button type="submit">Found Date <%= (currentOrder==='asc')? '▲' : '▼' %></button>
+            </th>
+            </form>
             <th><button>Id</button></th>
-            <th><button>Population ▲</button></th>
+            <form method="get" action="">
+            <th>
+              <input type="hidden" name="sortField" value="population">
+              <input type="hidden" name="order" value="<%= (currentOrder==='asc') ? 'desc' : 'asc' %>">
+              <button type="submit">Population <%= (currentOrder==='asc') ? '▲' : '▼' %></button>
+            </th>
+            </form>
             <th><button>Is Capital</button></th>
             <th><button>Action</button></th>
         </tr>
