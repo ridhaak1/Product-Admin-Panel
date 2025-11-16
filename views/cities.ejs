@@ -17,14 +17,16 @@
             <th>
               <input type="hidden" name="sortField" value="name">
               <input type="hidden" name="order" value="<%= (currentOrder ==='asc')? 'desc' : 'asc' %>">
-              <button type="submit">Name <%= (currentOrder==='asc') ? '▲' : '▼' %></button>
+              <button type="submit">
+              Name <span  class="<%= (currentSort === 'name') ? 'is-active' : '' %>"><%= (currentOrder==='asc') ? '▲' : '▼' %></span></button>
             </th>
             </form>
             <form method="get" action="">
             <th>
               <input type="hidden" name="sortField" value="foundDate">
               <input type="hidden" name="order" value="<%= (currentOrder==='asc')? 'desc' : 'asc' %>">
-              <button type="submit">Found Date <%= (currentOrder==='asc')? '▲' : '▼' %></button>
+              <button type="submit">
+              Found Date <span class="<%= (currentSort === 'foundDate') ? 'is-active' : '' %>"><%= (currentOrder==='asc')? '▲' : '▼' %></span></button>
             </th>
             </form>
             <th><button>Id</button></th>
@@ -32,7 +34,8 @@
             <th>
               <input type="hidden" name="sortField" value="population">
               <input type="hidden" name="order" value="<%= (currentOrder==='asc') ? 'desc' : 'asc' %>">
-              <button type="submit">Population <%= (currentOrder==='asc') ? '▲' : '▼' %></button>
+              <button type="submit">
+                Population <span class="<%= (currentSort === 'population') ? 'is-active' : '' %>"><%= (currentOrder==='asc') ? '▲' : '▼' %></span></button>
             </th>
             </form>
             <th><button>Is Capital</button></th>
@@ -43,10 +46,19 @@
         <% cities.forEach(city => { %>
         <tr>
           <td data-label="Name">
-                <figure class="image is-32x32">
-                  <img class="is-rounded" src="<%= city.imageUrl %>" alt="City Image">
-                </figure>
-               <%= city.name %>
+            <div class="tooltip">
+              <figure class="image is-32x32">
+                <img class="is-rounded" src="<%= city.imageUrl %>" alt="City Image">
+              </figure>
+
+              <span class="city-name"><%= city.name %></span>
+
+              <!-- Tooltip box -->
+              <span class="tooltip-text">
+                <strong><%= city.name %></strong><br>
+                <%= city.description %>
+              </span>
+            </div>
           </td>
           <td data-label="Found Date"><%= city.foundedDate %></td>
           <td data-label="Id"><%= city.id %></td>

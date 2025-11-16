@@ -1,0 +1,66 @@
+<%- include("partials/navbar") %>
+<main>
+  <form action="#">
+    <div class="field is-grouped">
+      <p class="control is-expanded">
+        <input class="input" type="search" name="search" value="<%= search || '' %>" placeholder="Search country 🔍">
+      </p>
+      <p class="control">
+        <button class="button is-info" type="submit">🔍</button>
+      </p>
+    </div>
+  </form>
+
+  <table class="table-modern-country">
+    <thead>
+      <tr>
+        <form method="get" action="">
+          <th>
+            <input type="hidden" name="sortField" value="name">
+            <input type="hidden" name="order" value="<%= (currentOrder ==='asc')? 'desc' : 'asc' %>">
+            <button type="submit">
+              Country <span class="<%= (currentSort === 'name') ? 'is-active' : '' %>"><%= (currentOrder==='asc') ? '▲' : '▼' %></span>
+            </button>
+          </th>
+        </form>
+        <th>Continent</th>
+        <form method="get" action="">
+          <th>
+            <input type="hidden" name="sortField" value="independenceYear">
+            <input type="hidden" name="order" value="<%= (currentOrder==='asc')? 'desc' : 'asc' %>">
+            <button type="submit">
+              Independence <span class="<%= (currentSort === 'independenceYear') ? 'is-active' : '' %>"><%= (currentOrder==='asc')? '▲' : '▼' %></span>
+            </button>
+          </th>
+        </form>
+        <th>Motto</th>
+        <th>Action</th>
+      </tr>
+    </thead>
+    <tbody>
+      <% countries.forEach(country => { %>
+      <tr>
+        <td data-label="Country">
+          <div class="tooltip-country">
+            <figure class="image is-32x32">
+              <img class="is-rounded" src="<%= country.flagUrl %>" alt="Flag of <%= country.name %>">
+            </figure>
+            <span class="country-name"><%= country.name %></span>
+
+            <!-- Tooltip box -->
+            <span class="tooltip-text-country">
+              <strong><%= country.name %></strong><br>
+              <%= country.motto %>
+            </span>
+          </div>
+        </td>
+        <td data-label="Continent"><%= country.continent %></td>
+        <td data-label="Independence"><%= country.independenceYear %></td>
+        <td data-label="Motto"><%= country.motto %></td>
+        <td data-label="Action"><a href="/countries/details/<%= country.id %>" target="_blank">View details</a></td>
+      </tr>
+      <% }); %>
+    </tbody>
+  </table>
+</main>
+<%- include("partials/footer") %>
