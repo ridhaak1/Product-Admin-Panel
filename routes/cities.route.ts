@@ -47,7 +47,7 @@ router.get("/details/:id", async (req, res)=>{
     const cities = await getCityInfo();
     const id = req.params.id;
     const city = cities.find(c => c.id === id);
-    res.render("details.ejs", {city})
+    res.render("cityDetails.ejs", {city})
 })
 
 export default router;

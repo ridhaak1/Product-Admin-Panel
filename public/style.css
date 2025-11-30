@@ -2,6 +2,7 @@
     font-family: "Poppins", sans-serif;
     margin: 0;
     padding: 0;
+    min-height: 100vh;
 }
 form{
     margin: 25px;
