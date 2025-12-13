@@ -1,22 +1,14 @@
 import { Router } from "express";
 import { City } from "../types";
+import { citiesCollection, updateCity } from "../database";
+import { secureMiddleware, isAdmin } from "../middlewares/middlewares";
 
 const router = Router();
 
-async function getCityInfo():Promise<City[]>{
-    try {
-        const response = await fetch("https://raw.githubusercontent.com/ridhaak1/dataset-webontwekkeling/refs/heads/main/steden.json");
-        const dataCity:City[] = await response.json();
-        return dataCity;
-    } catch (error: any){
-        return error;
-    }
-}
-
-router.get("/", async (req, res)=>{
-    const cities = await getCityInfo();
+router.get("/", secureMiddleware, async (req, res)=>{
+    const cities = await citiesCollection.find().toArray();
     const search = req.query.search?.toString().toLocaleLowerCase() || "";
-    const sortField = req.query.sortField;
+    const sortField = req.query.sortField || "name";
     const order = req.query.order || "asc";
     let sortedCities = [...cities];
     if(search){
@@ -43,11 +35,29 @@ router.get("/", async (req, res)=>{
     res.render("cities.ejs", {cities: sortedCities, search, currentSort: sortField, currentOrder: order})
 })
 
-router.get("/details/:id", async (req, res)=>{
-    const cities = await getCityInfo();
+router.get("/details/:id", secureMiddleware, async (req, res)=>{
+    const cities = await citiesCollection.find().toArray();
     const id = req.params.id;
     const city = cities.find(c => c.id === id);
-    res.render("cityDetails.ejs", {city})
+    res.render("cityDetails.ejs", {city, pageCss: "details", currentUser: req.session.user})
 })
+
+router.get("/editcity/:id", secureMiddleware, isAdmin, async (req, res)=>{
+    const cities = await citiesCollection.find().toArray();
+    const id = req.params.id;
+    const city = cities.find(c => c.id === id);
+    res.render("edit.ejs", {city, pageCss: "editPage"})
+})
+
+router.post("/editcity", secureMiddleware, async (req, res) => {
+    const {id, name, description, population, isCapital } = req.body;
+    await updateCity(id, {
+        name,
+        description,
+        population: Number(population),
+        isCapital: isCapital === "true"
+    });
+    res.redirect("/cities");
+});
 
 export default router;

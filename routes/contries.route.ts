@@ -1,23 +1,16 @@
 import { Router } from "express";
 import { Country } from "../types";
+import { countriesCollection } from "../database";
+import { secureMiddleware } from "../middlewares/middlewares";
 
 const router = Router();
 
-async function getCountryInfo():Promise<Country[]> {
-    try {
-        const response = await fetch("https://raw.githubusercontent.com/ridhaak1/dataset-webontwekkeling/refs/heads/main/landen.json");
-        const dataCountry: Country[] = await response.json();
-        return dataCountry;
-    } catch (error: any){
-        return error;
-    }
-}
 
-router.get("/", async (req, res) => {
-    const countries = await getCountryInfo();
+router.get("/", secureMiddleware, async (req, res) => {
+    const countries = await countriesCollection.find().toArray();
 
     const search = req.query.search?.toString().toLowerCase() || "";
-    const sortField = req.query.sortField || "";
+    const sortField = req.query.sortField || "name";
     const order = req.query.order || "asc";
 
     let filteredCountries = [...countries];
@@ -47,10 +40,10 @@ router.get("/", async (req, res) => {
         currentOrder: order
     });
 })
-router.get("/details/:id", async (req, res) => {
-    const countries = await getCountryInfo();
+router.get("/details/:id", secureMiddleware, async (req, res) => {
+    const countries = await countriesCollection.find().toArray();
     const country = countries.find(c => c.id === req.params.id);
-    res.render("countryDetail.ejs", { country });
+    res.render("countryDetail.ejs", { country, pageCss: "countryDetail"});
 });
 
 export default router;

@@ -19,3 +19,14 @@ export interface City {
   landmarks: string[];
   countryid: string;
 }
+
+export interface User {
+  email: string;
+  password?: string;
+  role: string;
+}
+
+export interface FlashMessage {
+    type: "error" | "success"
+    message: string;
+}

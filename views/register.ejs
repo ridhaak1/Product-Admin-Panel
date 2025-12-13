@@ -1,0 +1,32 @@
+<%- include("partials/navbar") %>
+
+<div class="register-wrapper">
+    <form action="/register" method="post" class="register-form">
+        <h2>Registreren</h2>
+        
+        <% if (typeof error !== "undefined") { %>
+            <div class="form-error">
+                <%= error %>
+            </div>
+        <% } %>
+
+        <div class="form-group">
+            <label for="identifier">Gebruikersnaam of e-mail:</label>
+            <input type="text" id="identifier" name="identifier" required />
+        </div>
+
+        <div class="form-group">
+            <label for="password">Wachtwoord:</label>
+            <input type="password" id="password" name="password" required />
+        </div>
+
+        <button type="submit">Account aanmaken</button>
+        <div class="login-link">
+            <span>Heb je al een account?</span>
+            <a href="/login">Inloggen</a>
+        </div>
+    </form>
+</div>
+
+<%- include("partials/footer") %>
+

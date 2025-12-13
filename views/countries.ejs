@@ -1,66 +1,93 @@
 <%- include("partials/navbar") %>
-<main>
-  <form action="#">
-    <div class="field is-grouped">
-      <p class="control is-expanded">
-        <input class="input" type="search" name="search" value="<%= search || '' %>" placeholder="Search country 🔍">
-      </p>
-      <p class="control">
-        <button class="button is-info" type="submit">🔍</button>
-      </p>
-    </div>
+
+<main class="mp-container">
+
+  <!-- Search Box -->
+  <form action="#" class="mp-searchBox">
+      <input class="mp-searchInput" 
+             type="search" 
+             name="search" 
+             value="<%= search || '' %>" 
+             placeholder="Search country 🔍">
+      <button class="mp-searchBtn" type="submit">🔍</button>
   </form>
 
-  <table class="table-modern-country">
-    <thead>
-      <tr>
-        <form method="get" action="">
-          <th>
-            <input type="hidden" name="sortField" value="name">
-            <input type="hidden" name="order" value="<%= (currentOrder ==='asc')? 'desc' : 'asc' %>">
-            <button type="submit">
-              Country <span class="<%= (currentSort === 'name') ? 'is-active' : '' %>"><%= (currentOrder==='asc') ? '▲' : '▼' %></span>
-            </button>
-          </th>
-        </form>
-        <th>Continent</th>
-        <form method="get" action="">
-          <th>
-            <input type="hidden" name="sortField" value="independenceYear">
-            <input type="hidden" name="order" value="<%= (currentOrder==='asc')? 'desc' : 'asc' %>">
-            <button type="submit">
-              Independence <span class="<%= (currentSort === 'independenceYear') ? 'is-active' : '' %>"><%= (currentOrder==='asc')? '▲' : '▼' %></span>
-            </button>
-          </th>
-        </form>
-        <th>Motto</th>
-        <th>Action</th>
-      </tr>
-    </thead>
-    <tbody>
-      <% countries.forEach(country => { %>
-      <tr>
-        <td data-label="Country">
-          <div class="tooltip-country">
-            <figure class="image is-32x32">
-              <img class="is-rounded" src="<%= country.flagUrl %>" alt="Flag of <%= country.name %>">
-            </figure>
-            <span class="country-name"><%= country.name %></span>
+  <!-- Countries Table -->
+  <table class="mp-table">
+      <thead>
+          <tr>
 
-            <!-- Tooltip box -->
-            <span class="tooltip-text-country">
-              <strong><%= country.name %></strong><br>
-              <%= country.motto %>
-            </span>
-          </div>
-        </td>
-        <td data-label="Continent"><%= country.continent %></td>
-        <td data-label="Independence"><%= country.independenceYear %></td>
-        <td data-label="Motto"><%= country.motto %></td>
-        <td data-label="Action"><a href="/countries/details/<%= country.id %>" target="_blank">View details</a></td>
-      </tr>
-      <% }); %>
-    </tbody>
+              <!-- Sort by Name -->
+              <th>
+                  <form method="get" action="">
+                      <input type="hidden" name="sortField" value="name">
+                      <input type="hidden" name="order" value="<%= (currentOrder === 'asc') ? 'desc' : 'asc' %>">
+                      <button type="submit">
+                          Country
+                          <span class="<%= (currentSort === 'name') ? 'is-active' : '' %>">
+                              <%= (currentOrder === 'asc') ? '▼' : '▲' %>
+                          </span>
+                      </button>
+                  </form>
+              </th>
+
+              <!-- Continent -->
+              <th>Continent</th>
+
+              <!-- Sort by Independence Year -->
+              <th>
+                  <form method="get" action="">
+                      <input type="hidden" name="sortField" value="independenceYear">
+                      <input type="hidden" name="order" value="<%= (currentOrder === 'asc') ? 'desc' : 'asc' %>">
+                      <button type="submit">
+                          Independence
+                          <span class="<%= (currentSort === 'independenceYear') ? 'is-active' : '' %>">
+                              <%= (currentOrder === 'asc') ? '▲' : '▼' %>
+                          </span>
+                      </button>
+                  </form>
+              </th>
+
+              <th>Motto</th>
+              <th>Action</th>
+          </tr>
+      </thead>
+
+      <tbody>
+          <% countries.forEach(country => { %>
+          <tr>
+
+              <!-- Country + Flag + Tooltip -->
+              <td>
+                  <div class="mp-cityCell mp-tooltip">
+                      <img class="mp-cityImg" src="<%= country.flagUrl %>" alt="Flag">
+
+                      <span class="mp-cityName"><%= country.name %></span>
+
+                      <!-- Tooltip -->
+                      <div class="mp-tooltip-text">
+                          <strong><%= country.name %></strong><br>
+                          <%= country.motto %>
+                      </div>
+                  </div>
+              </td>
+
+              <td><%= country.continent %></td>
+              <td><%= country.independenceYear %></td>
+              <td><%= country.motto %></td>
+
+              <td>
+                <a class="mp-actionLink" 
+                   href="/countries/details/<%= country.id %>" >
+                   View details
+                </a>
+              </td>
+
+          </tr>
+          <% }); %>
+      </tbody>
   </table>
+
 </main>
+
 <%- include("partials/footer") %>

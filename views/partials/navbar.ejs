@@ -3,18 +3,22 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet"href="https://cdn.jsdelivr.net/npm/bulma@1.0.4/css/bulma.min.css">
+    <!-- <link rel="stylesheet"href="https://cdn.jsdelivr.net/npm/bulma@1.0.4/css/bulma.min.css"> -->
     <link rel="stylesheet" href="/style.css">
-    <link rel="stylesheet" href="/details.css">
-    <link rel="stylesheet" href="/countries.css">
+    <% if (typeof pageCss !== "undefined") { %>
+        <link rel="stylesheet" href="/<%= pageCss %>.css">
+    <% } %>
     <title>Ridha Project</title>
 </head>
 <body>
-<nav class="navbar is-dark" role="navigation" aria-label="main navigation">
-  <div class="navbar-menu is-active">
-    <div class="navbar-start is-flex is-justify-content-start" style="gap: 1rem;">
-      <a class="navbar-item" href="/">Home</a>
-      <a class="navbar-item" href="/countries">Lands</a>
-    </div>
+<nav class="app-navbar">
+  <div class="nav-container">
+      <a href="/">Home</a>
+      <a href="/countries">Lands</a>
+     <% if (user) { %>
+      <form class="logout-form" action="/login/logout" method="post">
+          <button class="logout-btn" type="submit">Logout</button>
+      </form>
+      <% } %>
   </div>
 </nav>

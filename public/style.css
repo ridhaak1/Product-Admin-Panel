@@ -1,157 +1,278 @@
- body {
-    font-family: "Poppins", sans-serif;
+/* ----------------------------
+   RESET
+----------------------------- */
+* {
     margin: 0;
     padding: 0;
+    box-sizing: border-box;
+    font-family: "Segoe UI", Tahoma, sans-serif;
+}
+
+body {
+    background: #f5f6fa;
+    color: #333;
     min-height: 100vh;
-}
-form{
-    margin: 25px;
-}
-
-.table-modern {
-    margin: 40px auto;
-    width: 70%;
-    border-collapse: separate;
-    border-spacing: 0;
-    border-radius: 12px;
-    overflow: hidden;
-    box-shadow: 0 8px 25px rgba(0,0,0,0.1);
+    display: flex;
+    flex-direction: column;
 }
 
-.table-modern thead {
-    background: linear-gradient(90deg, #6a11cb 0%, #2575fc 100%);
+/* ----------------------------
+   NAVBAR
+----------------------------- */
+.app-navbar {
+    width: 100%;
+    background: white;
+    padding: 15px 0;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+    position: sticky;
+    top: 0;
+    z-index: 100;
+}
+
+.nav-container {
+    width: 90%;
+    max-width: 1300px;
+    margin: auto;
+    display: flex;
+    justify-content: flex-start;
+    gap: 25px;
+}
+
+.nav-container a {
+    text-decoration: none;
+    color: #444;
+    font-weight: 500;
+    font-size: 1.05rem;
+    transition: 0.2s;
+}
+
+.nav-container a:hover {
+    color: #0077ff;
+}
+
+/* Logout button inside navbar */
+.logout-form {
+    margin-left: auto;
+}
+
+.logout-btn {
+    padding: 10px 16px;
+    background: #ff4b4b;
     color: white;
-    text-align: left;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    font-size: 0.95rem;
+    font-weight: 500;
+    transition: 0.2s;
 }
-.table-modern th button {
+
+.logout-btn:hover {
+    background: #d93636;
+}
+
+/* ----------------------------
+   FOOTER
+----------------------------- */
+.app-footer {
+    margin-top: auto;
+    background: white;
+    text-align: center;
+    padding: 18px;
+    box-shadow: 0 -2px 10px rgba(0,0,0,0.05);
+    font-size: 0.9rem;
+    color: #555;
+}
+
+.app-footer strong {
+    color: #0077ff;
+}
+
+/* ----------------------------
+   MAIN PAGE CONTAINER
+----------------------------- */
+.mp-container {
+    width: 90%;
+    max-width: 1300px;
+    margin: 40px auto;
+    background: white;
+    padding: 25px;
+    border-radius: 12px;
+    box-shadow: 0 2px 12px rgba(0,0,0,0.05);
+}
+
+/* ----------------------------
+   SEARCH BOX
+----------------------------- */
+.mp-searchBox {
+    display: flex;
+    gap: 10px;
+    margin-bottom: 20px;
+}
+
+.mp-searchInput {
+    flex: 1;
+    padding: 12px;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    outline: none;
+    font-size: 1rem;
+    transition: 0.2s;
+}
+
+.mp-searchInput:focus {
+    border-color: #0077ff;
+    box-shadow: 0 0 5px rgba(0,119,255,0.2);
+}
+
+.mp-searchBtn {
+    padding: 12px 18px;
+    background: #0077ff;
+    color: white;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    font-size: 1rem;
+    transition: 0.2s;
+}
+
+.mp-searchBtn:hover {
+    background: #005fcc;
+}
+
+/* ----------------------------
+   TABLE
+----------------------------- */
+.mp-table {
+    width: 100%;
+    border-collapse: collapse;
+    overflow: hidden;
+}
+
+.mp-table thead {
+    background: #f0f4ff;
+}
+
+.mp-table th, .mp-table td {
+    padding: 14px;
+    text-align: left;
+    font-size: 0.95rem;
+    border-bottom: 1px solid #eee;
+}
+
+.mp-table th button {
     background: transparent;
     border: none;
-    color: white;
-    font-weight: bold;
     cursor: pointer;
+    font-weight: 600;
+    font-size: 0.95rem;
+}
+
+.mp-table th button:hover {
+    color: #0077ff;
+}
+
+.mp-table tr:hover {
+    background: #f9fbff;
+}
+
+/* ----------------------------
+   CITY IMAGE + NAME
+----------------------------- */
+.mp-cityCell {
     display: flex;
     align-items: center;
-    gap: 5px;
-    padding: 10px 5px;
-    transition: all 0.3s ease;
+    gap: 12px;
+    position: relative;
 }
 
-.table-modern th button:hover {
-    transform: scale(1.05) rotate(3deg);
-    text-shadow: 0 2px 5px rgba(0,0,0,0.3);
+.mp-cityImg {
+    width: 50px;
+    height: 50px;
+    border-radius: 6px;
+    object-fit: cover;
 }
 
-.table-modern tbody tr {
-    transition: all 0.3s ease;
+/* ----------------------------
+   TOOLTIP
+----------------------------- */
+.mp-tooltip {
+    position: relative;
 }
 
-.table-modern tbody tr:hover {
-    background: rgba(37, 117, 252, 0.1);
-    transform: translateX(5px);
+.mp-tooltip-text {
+    visibility: hidden;
+    opacity: 0;
+    width: 220px;
+    background: white;
+    padding: 10px;
+    border-radius: 8px;
+    box-shadow: 0 3px 10px rgba(0,0,0,0.1);
+    position: absolute;
+    top: 60px;
+    left: 0;
+    z-index: 10;
+    transition: 0.2s;
 }
 
-.table-modern td, .table-modern th {
-    padding: 12px 15px;
+.mp-tooltip:hover .mp-tooltip-text {
+    visibility: visible;
+    opacity: 1;
 }
 
-.table-modern td figure {
-    margin-right: 10px;
-    display: inline-block;
-    vertical-align: middle;
+.is-active{
+    color: #0077ff;
 }
 
-.table-modern td a {
-    color: #2575fc;
-    font-weight: bold;
+/* ----------------------------
+   ACTION LINKS
+----------------------------- */
+.mp-actionLink {
     text-decoration: none;
-    transition: all 0.3s ease;
+    color: #0077ff;
+    font-weight: 500;
+    transition: 0.2s;
 }
 
-.table-modern td a:hover {
-    color: #6a11cb;
-    text-shadow: 0 1px 2px rgba(0,0,0,0.2);
+.mp-actionLink:hover {
+    color: #005fcc;
 }
 
-.is-active {
-  color: dodgerblue !important;
-  font-weight: bold;
-}
-
-
-.tooltip {
-  position: relative;
-  display: inline-block;
-  cursor: pointer;
-}
-
-
-.tooltip-text {
-  position: absolute;
-  top: 50%;
-  left: 110%;  
-
-  transform: translateY(-50%);
-
-  background: rgba(0, 0, 0, 0.90); 
-  color: #fff;
-  padding: 10px 14px;
-  border-radius: 8px;
-  width: 220px;
-
-  z-index: 99999;
-
-  opacity: 0;
-  visibility: hidden;
-  transition: opacity 0.2s ease;
-  pointer-events: none;
-
-
-  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.35);
-}
-
-
-.tooltip-text::after {
-  content: "";
-  position: absolute;
-  left: -8px;
-  top: 50%;
-  transform: translateY(-50%);
-  border-width: 8px;
-  border-style: solid;
-  border-color: transparent rgba(0,0,0,0.90) transparent transparent;
-}
-
-
-.tooltip:hover .tooltip-text {
-  opacity: 1;
-  visibility: visible;
-}
-
-
-@media screen and (max-width: 768px) {
-    .table-modern thead {
+/* ----------------------------
+   RESPONSIVE
+----------------------------- */
+@media (max-width: 850px) {
+    .mp-table thead {
         display: none;
     }
-    .table-modern, .table-modern tbody, .table-modern tr, .table-modern td {
+
+    .mp-table tr {
         display: block;
-        width: 100%;
+        margin-bottom: 10px;
+        background: #fafafa;
+        border-radius: 10px;
+        padding: 10px;
     }
-    .table-modern tr {
-        margin-bottom: 15px;
-        border-bottom: 2px solid #f0f0f0;
+
+    .mp-table td {
+        display: flex;
+        justify-content: space-between;
+        padding: 10px 6px;
+        border: none;
+        border-bottom: 1px solid #eee;
     }
-    .table-modern td {
-        text-align: right;
-        padding-left: 50%;
-        position: relative;
+}
+
+@media (max-width: 600px) {
+    .nav-container {
+        justify-content: center;
     }
-    .table-modern td::before {
-        content: attr(data-label);
-        position: absolute;
-        left: 15px;
-        width: calc(50% - 30px);
-        text-align: left;
-        font-weight: bold;
-        color: #4a4a4a;
+
+    .mp-container {
+        padding: 15px;
+    }
+
+    .mp-searchBox {
+        flex-direction: column;
     }
 }

@@ -12,14 +12,23 @@
 
       <table class="city-table">
         <tbody>
-          <tr><td>Region Type</td><td class="sInfo"><%= city.regionType %></td></tr>
-          <tr><td>Population</td><td class="sInfo"><%= city.population %></td></tr>
-          <tr><td>Capital</td><td class="sInfo"><%= city.isCapital %></td></tr>
-          <tr><td>Founded</td><td class="sInfo"><%= city.foundedDate %></td></tr>
-          <tr><td>Country ID</td><td class="sInfo"><%= city.countryid %></td></tr>
-          <tr><td>Landmarks</td><td class="sInfo"><%= city.landmarks %></td></tr>
+          <tr><td>Regio Type</td><td class="sInfo"><%= city.regionType %></td></tr>
+          <tr><td>Inwoners</td><td class="sInfo"><%= city.population %></td></tr>
+          <tr><td>Hoofdstad</td><td class="sInfo"><%= city.isCapital ? "Ja" : "Nee" %></td></tr>
+          <tr><td>Gesticht</td><td class="sInfo"><%= city.foundedDate %></td></tr>
+          <tr><td>Land ID</td><td class="sInfo"><%= city.countryid %></td></tr>
+          <tr><td>Bezienswaardigheden</td><td class="sInfo"><%= city.landmarks %></td></tr>
         </tbody>
       </table>
+
+      <!-- Buttons -->
+      <div class="city-buttons">
+        <a href="/cities" class="btn-back">← Terug</a>
+        <% if (currentUser.role === "ADMIN") { %>
+        <a href="/cities/editcity/<%= city.id %>" class="btn-edit">✎ Bewerken</a>
+        <% } %>
+      </div>
+
     </div>
   </div>
 </div>

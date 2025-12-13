@@ -1,0 +1,28 @@
+<%- include("partials/navbar") %>
+<div class="login-wrapper">
+    <form action="/login" method="post" class="login-form">
+        <h2>Login</h2>
+       <% if (message) { %>
+            <div class="form-error <%= message.type === 'success' ? 'form-success' : '' %>">
+                <%= message.message %>
+            </div>
+        <% } %>
+
+        <div class="form-group">
+            <label for="email">Email Of Gebruikersnaam:</label>
+            <input type="text" id="email" name="email"/>
+        </div>
+
+        <div class="form-group">
+            <label for="password">Wachtwoord:</label>
+            <input type="password" id="password" name="password"/>
+        </div>
+        <button type="submit">Login</button>
+        
+        <div class="register-link">
+            <span>Heb je nog geen account?</span>
+            <a href="/register">Registreren</a>
+        </div>
+    </form>
+</div>
+<%- include("partials/footer") %>

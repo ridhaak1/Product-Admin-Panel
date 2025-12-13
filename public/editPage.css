@@ -1,0 +1,129 @@
+/* ====== Container ====== */
+.editCity-container {
+    max-width: 850px;
+    margin: 40px auto;
+    background: #ffffff;
+    padding: 35px;
+    border-radius: 18px;
+    box-shadow: 0 6px 20px rgba(0,0,0,0.15);
+}
+
+/* Title */
+.editCity-title {
+    text-align: center;
+    font-size: 32px;
+    font-weight: 700;
+    margin-bottom: 25px;
+    color: #222;
+}
+
+/* Image */
+.editCity-image {
+    display: block;
+    width: 250px;
+    height: 180px;
+    object-fit: cover;
+    margin: 0 auto 25px;
+    border-radius: 14px;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+}
+
+/* Form */
+.editCity-form {
+    display: flex;
+    flex-direction: column;
+    gap: 18px;
+}
+
+/* Labels */
+.editCity-label {
+    font-size: 17px;
+    font-weight: 600;
+    color: #333;
+}
+
+/* Inputs */
+.editCity-input,
+.editCity-textarea,
+.editCity-select {
+    width: 100%;
+    padding: 12px 14px;
+    border-radius: 10px;
+    border: 1px solid #ccc;
+    font-size: 16px;
+    background: #f8f8f8;
+    transition: 0.2s;
+}
+
+.editCity-input:focus,
+.editCity-textarea:focus,
+.editCity-select:focus {
+    border-color: #0077ff;
+    background: #fff;
+    outline: none;
+    box-shadow: 0 0 0 2px rgba(0,120,255,0.2);
+}
+
+/* Textarea */
+.editCity-textarea {
+    min-height: 110px;
+    resize: vertical;
+}
+
+/* Separator Line */
+.editCity-line {
+    width: 100%;
+    height: 1px;
+    background: #ddd;
+    margin: 10px 0 5px;
+}
+
+/* Info text */
+.editCity-info {
+    font-size: 16px;
+    color: #555;
+    margin: 4px 0;
+}
+
+.editCity-info strong {
+    color: #333;
+}
+
+/* Buttons */
+.editCity-submitBox {
+    margin-top: 25px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.editCity-submit {
+    background: #0070f3;
+    color: white;
+    padding: 12px 22px;
+    font-size: 17px;
+    border: none;
+    border-radius: 10px;
+    cursor: pointer;
+    transition: 0.2s;
+    font-weight: 600;
+}
+
+.editCity-submit:hover {
+    background: #005ad1;
+}
+
+.editCity-cancel {
+    text-decoration: none;
+    background: #e4e4e4;
+    color: #333;
+    padding: 12px 22px;
+    border-radius: 10px;
+    font-size: 16px;
+    transition: 0.2s;
+    font-weight: 600;
+}
+
+.editCity-cancel:hover {
+    background: #cfcfcf;
+}

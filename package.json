@@ -7,14 +7,20 @@
     "start": "nodemon app.ts"
   },
   "dependencies": {
+    "bcrypt": "^6.0.0",
+    "connect-mongodb-session": "^5.0.0",
     "dotenv": "^17.2.3",
     "ejs": "^3.1.10",
     "express": "^5.1.0",
-    "mongodb": "^7.0.0",
+    "express-session": "^1.18.2",
+    "mongodb": "^6.0.0",
     "readline-sync": "^1.4.10"
   },
   "devDependencies": {
+    "@types/bcrypt": "^6.0.0",
+    "@types/connect-mongodb-session": "^2.4.8",
     "@types/express": "^5.0.4",
+    "@types/express-session": "^1.18.2",
     "@types/readline-sync": "^1.4.8"
   },
   "keywords": [],
