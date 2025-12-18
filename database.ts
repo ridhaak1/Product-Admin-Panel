@@ -63,7 +63,7 @@ async function createInitialUser() {
         role: "ADMIN"
     });
 
-    let userEmail = process.env.USER_USERNAME; // يمكنك استخدام USER_USERNAME كـ email
+    let userEmail = process.env.USER_USERNAME;
     let userPassword = process.env.USER_PASSWORD;
     if (!userEmail || !userPassword) {
         throw new Error("USER_USERNAME and USER_PASSWORD must be set in environment");
