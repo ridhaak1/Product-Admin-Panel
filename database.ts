@@ -98,17 +98,17 @@ export async function registerUser(email:string, password:string) {
 
 export async function login(email: string, password: string) {
     if (email === "" || password === "") {
-        throw new Error("Email and password required");
+        throw new Error("E-mailadres en wachtwoord zijn verplicht");
     }
     let user : User | null = await userCollection.findOne<User>({email: email});
     if (user) {
         if (await bcrypt.compare(password, user.password!)) {
             return user;
         } else {
-            throw new Error("Password incorrect");
+            throw new Error("Wachtwoord is onjuist");
         }
     } else {
-        throw new Error("User not found");
+        throw new Error("Gebruiker niet gevonden");
     }
 }
 
