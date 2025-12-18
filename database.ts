@@ -52,8 +52,8 @@ async function createInitialUser() {
     if (await userCollection.countDocuments() > 1) {
         return;
     }
-    let email : string | undefined = process.env.ADMIN_EMAIL;
-    let password : string | undefined = process.env.ADMIN_PASSWORD;
+    const email : string | undefined = process.env.ADMIN_EMAIL;
+    const password : string | undefined = process.env.ADMIN_PASSWORD;
     if (email === undefined || password === undefined) {
         throw new Error("ADMIN_EMAIL and ADMIN_PASSWORD must be set in environment");
     }
@@ -63,8 +63,8 @@ async function createInitialUser() {
         role: "ADMIN"
     });
 
-    let userEmail = process.env.USER_USERNAME;
-    let userPassword = process.env.USER_PASSWORD;
+    const userEmail = process.env.USER_USERNAME;
+    const userPassword = process.env.USER_PASSWORD;
     if (!userEmail || !userPassword) {
         throw new Error("USER_USERNAME and USER_PASSWORD must be set in environment");
     }
