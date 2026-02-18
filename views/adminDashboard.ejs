@@ -1,0 +1,96 @@
+<%- include("partials/navbar") %>
+<main class="admin-dashboard-container">
+
+  <h1 class="dashboard-title">Admin Dashboard</h1>
+
+  <div class="dashboard-cards">
+    <div class="card">
+      <h2>Total Products</h2>
+      <p class="card-value"><%= totalProducts %></p>
+    </div>
+
+    <div class="card">
+      <h2>Total Categories</h2>
+      <p class="card-value"><%= totalCategories %></p>
+    </div>
+
+    <div class="card">
+      <h2>Total Users</h2>
+      <p class="card-value"><%= totalUsers %></p>
+    </div>
+
+    <div class="card">
+      <h2>Admins</h2>
+      <p class="card-value">
+        <%= recentUsers.filter(u => u.role === "ADMIN").length %>
+      </p>
+    </div>
+  </div>
+
+  <section class="dashboard-section">
+    <h2>Recent Products</h2>
+    <table class="dashboard-table">
+      <thead>
+        <tr>
+          <th>Name</th>
+          <th>Price</th>
+          <th>Stock</th>
+        </tr>
+      </thead>
+      <tbody>
+        <% recentProducts.forEach(p => { %>
+          <tr>
+            <td><%= p.name %></td>
+            <td>$<%= p.price.toFixed(2) %></td>
+            <td><%= p.stock %></td>
+          </tr>
+        <% }) %>
+      </tbody>
+    </table>
+  </section>
+
+  <section class="dashboard-section">
+    <h2>Recent Categories</h2>
+    <table class="dashboard-table">
+      <thead>
+        <tr>
+          <th>Name</th>
+          <th>Description</th>
+          <th>Slug</th>
+        </tr>
+      </thead>
+      <tbody>
+        <% recentCategories.forEach(c => { %>
+          <tr>
+            <td><%= c.name %></td>
+            <td><%= c.description %></td>
+            <td><%= c.slug %></td>
+          </tr>
+        <% }) %>
+      </tbody>
+    </table>
+  </section>
+
+  <section class="dashboard-section">
+    <h2>Recent Users</h2>
+    <table class="dashboard-table">
+      <thead>
+        <tr>
+          <th>Email</th>
+          <th>Role</th>
+        </tr>
+      </thead>
+      <tbody>
+        <% recentUsers.forEach(u => { %>
+          <tr>
+            <td><%= u.email %></td>
+            <td><%= u.role %></td>
+          </tr>
+        <% }) %>
+      </tbody>
+    </table>
+  </section>
+
+</main>
+
+<%- include("partials/footer") %>

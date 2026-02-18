@@ -3,22 +3,42 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <!-- <link rel="stylesheet"href="https://cdn.jsdelivr.net/npm/bulma@1.0.4/css/bulma.min.css"> -->
+    <title><%= pageTitle || "Product Management" %></title>
     <link rel="stylesheet" href="/style.css">
-    <% if (typeof pageCss !== "undefined") { %>
-        <link rel="stylesheet" href="/<%= pageCss %>.css">
-    <% } %>
-    <title>Ridha Project</title>
+    <link rel="stylesheet" href="/<%= pageCss %>">
+    <script type="module" src="/main.js" defer></script>
 </head>
 <body>
-<nav class="app-navbar">
-  <div class="nav-container">
-      <a href="/">Home</a>
-      <a href="/countries">Lands</a>
-     <% if (user) { %>
-      <form class="logout-form" action="/login/logout" method="post">
-          <button class="logout-btn" type="submit">Logout</button>
-      </form>
-      <% } %>
-  </div>
+<nav class="navbar">
+    <div class="container">
+        <a href="/" class="logo">🔥 MyShop</a>
+
+        <!-- Hamburger -->
+        <div class="menu-toggle" id="mobile-menu">
+            <span></span>
+            <span></span>
+            <span></span>
+        </div>
+
+        <ul class="nav-links" id="nav-links">
+            <li><a href="/products">Products</a></li>
+            <li><a href="/categories">Categories</a></li>
+
+            <% if (currentUser) { %>
+                <% if (currentUser.role === "ADMIN") { %>
+                    <li><a href="/adminDashboard">Admin Dashboard</a></li>
+                <% } %>
+            <li>
+            <form action="/logout" method="post" class="logout-form">
+                <button type="submit" class="logout-btn">
+                Logout (<%= currentUser.email %>)
+                </button>
+            </form>
+            </li>
+            <% } else { %>
+                <li><a href="/login">Login</a></li>
+                <li><a href="/register">Register</a></li>
+            <% } %>
+        </ul>
+    </div>
 </nav>

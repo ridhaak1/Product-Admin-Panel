@@ -1,26 +1,37 @@
 import { Router } from "express";
-import { User } from "../types";
-import { login, registerUser } from "../database";
-import session from "../session";
+import { registerUser } from "../database";
 import { ifLoggedIn } from "../middlewares/middlewares";
 
 const router = Router();
 
-router.post("/", async (req, res)=>{
-    const email: string = req.body.identifier;
-    const password:string = req.body.password;
+router.get("/", ifLoggedIn, (req, res) => {
+  res.render("register.ejs", {
+    pageCss: "register.css",
+    message: res.locals.message,
+    currentUser: req.session.user,
+    pageTitle: "Register",
+  });
+});
 
-    try{
-        await registerUser(email, password)
-        res.redirect("/login");
-    }catch(error:any){
-        res.render("register", {pageCss: "register", error: error.message})
-    }
-})
+router.post("/", async (req, res) => {
+  const email: string = req.body.email; // use email field from form
+  const password: string = req.body.password;
 
+  try {
+    await registerUser(email, password);
 
-router.get("/", ifLoggedIn, (req, res)=>{
-    res.render("register", {pageCss: "register"})
-})
+    req.session.message = {
+      type: "success",
+      message: "Account created successfully! Please login.",
+    };
+    res.redirect("/login");
+  } catch (error: any) {
+    req.session.message = {
+      type: "error",
+      message: error.message,
+    };
+    res.redirect("/register");
+  }
+});
 
 export default router;

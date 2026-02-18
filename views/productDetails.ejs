@@ -1,0 +1,34 @@
+<%- include("partials/navbar") %>
+
+<div class="product-card-container">
+  <div class="product-card">
+    <div class="product-image-box">
+      <img src="<%= product.imageUrl %>" alt="<%= product.name %>">
+    </div>
+
+    <div class="product-info">
+      <h1><%= product.name %></h1>
+      <p class="product-description"><%= product.description %></p>
+
+      <table class="product-table">
+        <tbody>
+          <tr><td>Category</td><td class="sInfo"><%= product.categoryName %></td></tr>
+          <tr><td>Price</td><td class="sInfo">$<%= product.price %></td></tr>
+          <tr><td>Discount</td><td class="sInfo"><%= product.discount %> %</td></tr>
+          <tr><td>Stock</td><td class="sInfo"><%= product.stock %></td></tr>
+          <tr><td>Created At</td><td class="sInfo"><%= product.createdAt.toDateString() %></td></tr>
+        </tbody>
+      </table>
+
+      <div class="product-buttons">
+        <a href="/products" class="btn-back">← Back to Products</a>
+        <% if (currentUser && currentUser.role === "ADMIN") { %>
+        <a href="/products/edit/<%= product._id %>" class="btn-edit">✎ Edit Product</a>
+        <% } %>
+      </div>
+
+    </div>
+  </div>
+</div>
+
+<%- include("partials/footer") %>

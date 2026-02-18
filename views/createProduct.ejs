@@ -1,0 +1,93 @@
+<%- include("partials/navbar") %>
+
+<main class="mp-container">
+
+  <h1 class="mp-pageTitle">➕ Add New Product</h1>
+
+  <form action="/products/create" method="post" class="mp-form">
+
+    <div class="mp-formGroup">
+      <label>Name</label>
+      <input 
+        type="text" 
+        name="name" 
+        required 
+        class="mp-input"
+        placeholder="Enter product name">
+    </div>
+
+    <div class="mp-formGroup">
+      <label>Description</label>
+      <textarea 
+        name="description" 
+        required 
+        class="mp-textarea"
+        placeholder="Enter product description"></textarea>
+    </div>
+
+    <div class="mp-formGroup">
+      <label>Image URL</label>
+      <input 
+        type="url" 
+        name="imageUrl" 
+        required 
+        class="mp-input"
+        placeholder="https://example.com/image.jpg">
+    </div>
+
+    <div class="mp-formGroup">
+      <label>Category</label>
+      <select name="categoryId" required class="mp-select">
+        <option value="">Select Category</option>
+        <% categories.forEach(cat => { %>
+          <option value="<%= cat._id %>">
+            <%= cat.name %>
+          </option>
+        <% }) %>
+      </select>
+    </div>
+
+    <div class="mp-formRow">
+      <div class="mp-formGroup">
+        <label>Price ($)</label>
+        <input 
+          type="number" 
+          name="price" 
+          step="0.01" 
+          min="0"
+          required 
+          class="mp-input">
+      </div>
+
+      <div class="mp-formGroup">
+        <label>Stock</label>
+        <input 
+          type="number" 
+          name="stock" 
+          min="0"
+          required 
+          class="mp-input">
+      </div>
+
+      <div class="mp-formGroup">
+        <label>Discount (%)</label>
+        <input 
+          type="number" 
+          name="discount" 
+          min="0"
+          max="100"
+          value="0"
+          class="mp-input">
+      </div>
+    </div>
+
+    <div class="mp-formActions">
+      <button type="submit" class="mp-addBtn">Create Product</button>
+      <a href="/products" class="mp-cancelBtn">Cancel</a>
+    </div>
+
+  </form>
+
+</main>
+
+<%- include("partials/footer") %>

@@ -1,0 +1,117 @@
+<%- include("partials/navbar") %>
+
+<main class="mp-container">
+
+
+  <h1 class="mp-pageTitle">Products 🔥</h1>
+
+
+  <form action="/products" method="get" class="mp-searchBox">
+
+    <input class="mp-searchInput" 
+           type="search" 
+           name="search" 
+           value="<%= search || '' %>" 
+           placeholder="Search product 🔍">
+
+    <select name="category" class="mp-select">
+        <option value="">All Categories</option>
+        <% categories.forEach(cat => { %>
+          <option value="<%= cat._id %>" <%= (currentCategory == cat._id.toString()) ? 'selected' : '' %>>
+            <%= cat.name %>
+          </option>
+        <% }) %>
+    </select>
+
+<input type="hidden" name="sortField" value="<%= currentSort || '' %>">
+<input type="hidden" name="order" value="<%= currentOrder || '' %>">
+
+
+    <button class="mp-searchBtn" type="submit">🔍</button>
+</form>
+
+
+
+  <% if(currentUser && currentUser.role === 'ADMIN') { %>
+    <div class="mp-addBtnContainer">
+      <a href="/products/create" class="mp-addBtn">➕ Add Product</a>
+    </div>
+  <% } %>
+  <div class="mp-sortContainer">
+
+  <a href="?search=<%= search %>&category=<%= currentCategory %>&sortField=name&order=<%= currentSort === 'name' && currentOrder === 'asc' ? 'desc' : 'asc' %>"
+     class="mp-sortBtn">
+     Sort by Name <%= currentSort === 'name' ? (currentOrder === 'asc' ? '↑' : '↓') : '' %>
+  </a>
+
+  <a href="?search=<%= search %>&category=<%= currentCategory %>&sortField=price&order=<%= currentSort === 'price' && currentOrder === 'asc' ? 'desc' : 'asc' %>"
+     class="mp-sortBtn">
+     Sort by Price <%= currentSort === 'price' ? (currentOrder === 'asc' ? '↑' : '↓') : '' %>
+  </a>
+
+  <a href="?search=<%= search %>&category=<%= currentCategory %>&sortField=stock&order=<%= currentSort === 'stock' && currentOrder === 'asc' ? 'desc' : 'asc' %>"
+     class="mp-sortBtn">
+     Sort by Stock <%= currentSort === 'stock' ? (currentOrder === 'asc' ? '↑' : '↓') : '' %>
+  </a>
+
+  <a href="?search=<%= search %>&category=<%= currentCategory %>&sortField=discount&order=<%= currentSort === 'discount' && currentOrder === 'asc' ? 'desc' : 'asc' %>"
+     class="mp-sortBtn">
+     Sort by Discount <%= currentSort === 'discount' ? (currentOrder === 'asc' ? '↑' : '↓') : '' %>
+  </a>
+
+</div>
+
+
+
+
+  <table class="mp-table">
+      <thead>
+          <tr>
+              <th>Name</th>
+              <th>Category</th>
+              <th>Price</th>
+              <th>Stock</th>
+              <th>Discount</th>
+              <th>Actions</th>
+          </tr>
+      </thead>
+
+      <tbody>
+          <% products.forEach(product => { %>
+          <tr>
+              <td>
+                <div class="mp-productCell mp-tooltip">
+                    <img class="mp-productImg" src="<%= product.imageUrl %>" alt="<%= product.name %>">
+                    <span class="mp-productName"><%= product.name %></span>
+
+                    <!-- Tooltip -->
+                    <div class="mp-tooltip-text">
+                        <strong><%= product.name %></strong><br>
+                        <%= product.description %>
+                    </div>
+                </div>
+              </td>
+
+              <td><%= product.categoryName %></td>
+              <td>$<%= product.price.toFixed(2) %></td>
+              <td><%= product.stock %></td>
+              <td><%= product.discount %> %</td>
+
+              <td>
+                <a class="mp-actionLink" href="/products/details/<%= product._id %>">View</a>
+                <% if(currentUser && currentUser.role === 'ADMIN') { %>
+                  | <a class="mp-actionLink" href="/products/edit/<%= product._id %>">Edit</a>
+                  | 
+                  <form action="/products/delete/<%= product._id %>" method="post" class="mp-inlineForm">
+                      <button type="submit" class="mp-deleteBtn">Delete</button>
+                  </form>
+                <% } %>
+              </td>
+          </tr>
+          <% }) %>
+      </tbody>
+  </table>
+
+</main>
+
+<%- include("partials/footer") %>

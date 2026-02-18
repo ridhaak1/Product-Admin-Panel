@@ -1,0 +1,47 @@
+<%- include("partials/navbar") %>
+
+<div class="editProduct-container">
+
+    <h1 class="editProduct-title">Edit Product</h1>
+
+    <img class="editProduct-image" src="<%= product.imageUrl %>" alt="<%= product.name %>">
+
+    <form class="editProduct-form" action="/products/edit" method="POST">
+        <input type="hidden" name="id" value="<%= product._id %>">
+
+        <label class="editProduct-label">Name</label>
+        <input class="editProduct-input" type="text" name="name" value="<%= product.name %>" required>
+
+        <label class="editProduct-label">Description</label>
+        <textarea class="editProduct-textarea" name="description" required><%= product.description %></textarea>
+
+        <label class="editProduct-label">Price ($)</label>
+        <input class="editProduct-input" type="number" name="price" value="<%= product.price %>" required step="0.01">
+
+        <label class="editProduct-label">Discount (%)</label>
+        <input class="editProduct-input" type="number" name="discount" value="<%= product.discount %>" min="0" max="100">
+
+        <label class="editProduct-label">Stock</label>
+        <input class="editProduct-input" type="number" name="stock" value="<%= product.stock %>" required>
+
+        <label class="editProduct-label">Category</label>
+        <select class="editProduct-select" name="categoryId" required>
+            <% categories.forEach(cat => { %>
+                <option value="<%= cat._id %>" <%= (product.categoryId.toString() === cat._id.toString()) ? "selected" : "" %>>
+                    <%= cat.name %>
+                </option>
+            <% }); %>
+        </select>
+
+        <label class="editProduct-label">Image URL</label>
+        <input class="editProduct-input" type="text" name="imageUrl" value="<%= product.imageUrl %>">
+
+        <div class="editProduct-submitBox">
+            <input class="editProduct-submit" type="submit" value="Save Changes">
+            <a href="javascript:history.back()" class="editProduct-cancel">Cancel</a>
+        </div>
+    </form>
+
+</div>
+
+<%- include("partials/footer") %>

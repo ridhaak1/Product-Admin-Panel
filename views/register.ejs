@@ -1,8 +1,7 @@
 <%- include("partials/navbar") %>
-
 <div class="register-wrapper">
     <form action="/register" method="post" class="register-form">
-        <h2>Registreren</h2>
+        <h2>Create Account</h2>
         
         <% if (typeof error !== "undefined") { %>
             <div class="form-error">
@@ -11,19 +10,20 @@
         <% } %>
 
         <div class="form-group">
-            <label for="identifier">Gebruikersnaam of e-mail:</label>
+            <label for="identifier">Username or Email:</label>
             <input type="text" id="identifier" name="identifier" required />
         </div>
 
         <div class="form-group">
-            <label for="password">Wachtwoord:</label>
+            <label for="password">Password:</label>
             <input type="password" id="password" name="password" required />
         </div>
 
-        <button type="submit">Account aanmaken</button>
+        <button type="submit">Create Account</button>
+
         <div class="login-link">
-            <span>Heb je al een account?</span>
-            <a href="/login">Inloggen</a>
+            <span>Already have an account?</span>
+            <a href="/login">Login</a>
         </div>
     </form>
 </div>

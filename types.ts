@@ -1,24 +1,25 @@
-export interface Country {
-    id: string,
-    name: string,
-    continent: string,
-    flagUrl: string,
-    independenceYear: number,
-    motto: string
+import { ObjectId } from "mongodb";
+
+export interface Product {
+    _id?: ObjectId;
+    name: string;
+    description: string;
+    price: number;
+    stock: number;
+    discount: number;
+    categoryId: ObjectId;          
+    imageUrl?: string;           
+    isDeleted?: boolean;         
+    createdAt?: Date;
 }
 
-export interface City {
-  id: string;
-  name: string;
-  description: string;
-  population: number;
-  isCapital: boolean;
-  foundedDate: string;
-  imageUrl: string;
-  regionType: string;
-  landmarks: string[];
-  countryid: string;
-}
+export interface Category {
+    _id?: ObjectId;
+    name: string;
+    slug: string;
+    description: string;
+    imageUrl?: string;          }
+
 
 export interface User {
   email: string;

@@ -1,0 +1,305 @@
+/* ============================================= */
+/* 8. Products Page Styles (Custom Dashboard UI) */
+/* ============================================= */
+
+.mp-container {
+  width: 95%;
+  max-width: 1200px;
+  margin: 2rem auto;
+  padding: 20px;
+  background: var(--white);
+  border-radius: 12px;
+  box-shadow: var(--shadow-soft);
+}
+
+.mp-pageTitle {
+  font-size: 1.8rem;
+  font-weight: 700;
+  margin-bottom: 1.5rem;
+  color: var(--primary-color);
+  border-left: 5px solid var(--accent-color);
+  padding-left: 15px;
+}
+
+/* --- Search & Filter Section --- */
+.mp-searchBox {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  background: #f8f9fa;
+  padding: 15px;
+  border-radius: 8px;
+  margin-bottom: 20px;
+  align-items: center;
+}
+
+.mp-searchInput,
+.mp-select {
+  padding: 10px 15px;
+  border: 1px solid #ddd;
+  border-radius: 6px;
+  font-size: 0.9rem;
+  outline: none;
+  transition: var(--transition);
+}
+
+.mp-searchInput {
+  flex: 2;
+  min-width: 200px;
+}
+.mp-select {
+  flex: 1;
+  min-width: 150px;
+  cursor: pointer;
+}
+
+.mp-searchInput:focus,
+.mp-select:focus {
+  border-color: var(--accent-color);
+  box-shadow: 0 0 0 3px rgba(9, 132, 227, 0.1);
+}
+
+.mp-searchBtn {
+  background: var(--accent-color);
+  color: white;
+  border: none;
+  padding: 10px 20px;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: var(--transition);
+}
+
+.mp-searchBtn:hover {
+  background: #0773c5;
+}
+
+/* --- Sorting Buttons --- */
+.mp-sortContainer {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin-bottom: 20px;
+}
+
+.mp-sortBtn {
+  text-decoration: none;
+  font-size: 0.85rem;
+  color: var(--text-muted);
+  background: white;
+  padding: 6px 12px;
+  border: 1px solid #eee;
+  border-radius: 20px;
+  transition: var(--transition);
+}
+
+.mp-sortBtn:hover {
+  border-color: var(--accent-color);
+  color: var(--accent-color);
+}
+
+/* --- Add Product Button --- */
+.mp-addBtnContainer {
+  margin-bottom: 20px;
+  display: flex;
+  justify-content: flex-end;
+}
+
+.mp-addBtn {
+  text-decoration: none;
+  background: #27ae60;
+  color: white;
+  padding: 10px 20px;
+  border-radius: 6px;
+  font-weight: 600;
+  font-size: 0.9rem;
+  transition: var(--transition);
+}
+
+.mp-addBtn:hover {
+  background: #219150;
+  transform: translateY(-2px);
+}
+
+/* --- Table Styles --- */
+.mp-table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 10px;
+  overflow: hidden;
+}
+
+.mp-table thead {
+  background-color: #f8f9fa;
+}
+
+.mp-table th {
+  text-align: left;
+  padding: 15px;
+  font-size: 0.9rem;
+  color: var(--text-muted);
+  border-bottom: 2px solid #eee;
+}
+
+.mp-table td {
+  padding: 12px 15px;
+  border-bottom: 1px solid #f1f1f1;
+  vertical-align: middle;
+}
+
+.mp-table tr:hover {
+  background-color: #fcfcfc;
+}
+
+/* --- Product Cell & Image --- */
+.mp-productCell {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  position: relative;
+}
+
+.mp-productImg {
+  width: 45px;
+  height: 45px;
+  object-fit: cover;
+  border-radius: 8px;
+  border: 1px solid #eee;
+}
+
+.mp-productName {
+  font-weight: 600;
+  color: var(--primary-color);
+}
+
+/* --- Tooltip Logic --- */
+.mp-tooltip .mp-tooltip-text {
+  visibility: hidden;
+  width: 200px;
+  background-color: #333;
+  color: #fff;
+  text-align: center;
+  border-radius: 6px;
+  padding: 10px;
+  position: absolute;
+  z-index: 10;
+  bottom: 125%;
+  left: 50%;
+  transform: translateX(-50%);
+  opacity: 0;
+  transition: opacity 0.3s;
+  font-size: 0.75rem;
+  pointer-events: none;
+}
+
+.mp-tooltip:hover .mp-tooltip-text {
+  visibility: visible;
+  opacity: 1;
+}
+
+/* --- Action Links & Buttons --- */
+.mp-actionLink {
+  text-decoration: none;
+  color: var(--accent-color);
+  font-size: 0.85rem;
+  font-weight: 500;
+}
+
+.mp-inlineForm {
+  display: inline;
+}
+
+.mp-deleteBtn {
+  background: none;
+  border: none;
+  color: var(--danger-color);
+  cursor: pointer;
+  font-size: 0.85rem;
+  font-weight: 500;
+  padding: 0;
+}
+
+.mp-deleteBtn:hover {
+  text-decoration: underline;
+}
+
+/* ============================= */
+/* 9. Responsive Table Layout    */
+/* ============================= */
+@media (max-width: 850px) {
+  .mp-table,
+  .mp-table thead,
+  .mp-table tbody,
+  .mp-table th,
+  .mp-table td,
+  .mp-table tr {
+    display: block;
+  }
+
+  .mp-table thead {
+    display: none;
+  }
+
+  .mp-table tr {
+    margin-bottom: 15px;
+    border: 1px solid #eee;
+    border-radius: 10px;
+    padding: 10px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.02);
+  }
+
+  .mp-table td {
+    text-align: right;
+    padding-left: 50%;
+    position: relative;
+    border-bottom: 1px solid #f9f9f9;
+  }
+
+  .mp-table td::before {
+    content: attr(
+      data-label
+    ); /* Requires data-label in HTML or CSS manual mapping */
+    position: absolute;
+    left: 15px;
+    width: 45%;
+    text-align: left;
+    font-weight: bold;
+    color: var(--text-muted);
+  }
+
+  /* Manual Labels for this specific table */
+  .mp-table td:nth-of-type(1):before {
+    content: "Product";
+  }
+  .mp-table td:nth-of-type(2):before {
+    content: "Category";
+  }
+  .mp-table td:nth-of-type(3):before {
+    content: "Price";
+  }
+  .mp-table td:nth-of-type(4):before {
+    content: "Stock";
+  }
+  .mp-table td:nth-of-type(5):before {
+    content: "Discount";
+  }
+  .mp-table td:nth-of-type(6):before {
+    content: "Actions";
+  }
+
+  .mp-productCell {
+    justify-content: flex-end;
+  }
+}
+
+@media (max-width: 480px) {
+  .mp-searchBox {
+    flex-direction: column;
+    align-items: stretch;
+  }
+  .mp-sortContainer {
+    justify-content: center;
+  }
+  .mp-addBtnContainer {
+    justify-content: center;
+  }
+}

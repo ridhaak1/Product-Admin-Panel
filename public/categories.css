@@ -1,0 +1,246 @@
+/* ============================================= */
+/* 10. Categories Page Styles (Advanced Dashboard) */
+/* ============================================= */
+
+.mp-container {
+  width: 95%;
+  max-width: 1200px;
+  margin: 2rem auto;
+  padding: 25px;
+  background: var(--white);
+  border-radius: 12px;
+  box-shadow: var(--shadow-soft);
+}
+
+.mp-searchBox {
+  display: flex;
+  gap: 0;
+  margin-bottom: 25px;
+  max-width: 500px;
+}
+
+.mp-searchInput {
+  flex: 1;
+  padding: 12px 15px;
+  border: 1px solid #e1e4e8;
+  border-radius: 8px 0 0 8px;
+  font-size: 0.95rem;
+  outline: none;
+  transition: var(--transition);
+}
+
+.mp-searchInput:focus {
+  border-color: var(--accent-color);
+  box-shadow: inset 0 1px 2px rgba(0, 0, 0, 0.075);
+}
+
+.mp-searchBtn {
+  background: var(--accent-color);
+  color: white;
+  border: none;
+  padding: 0 20px;
+  border-radius: 0 8px 8px 0;
+  cursor: pointer;
+  transition: var(--transition);
+}
+
+.mp-searchBtn:hover {
+  background: #0773c5;
+}
+
+.mp-table {
+  width: 100%;
+  border-collapse: separate;
+  border-spacing: 0;
+  margin-top: 10px;
+}
+
+.mp-table th {
+  background-color: #f8f9fa;
+  padding: 15px;
+  text-align: left;
+  font-weight: 600;
+  color: var(--text-muted);
+  border-bottom: 2px solid #edf2f7;
+}
+
+.mp-table th form button {
+  background: none;
+  border: none;
+  font-family: inherit;
+  font-size: 0.9rem;
+  font-weight: 600;
+  color: var(--text-main);
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  padding: 0;
+  transition: var(--transition);
+}
+
+.mp-table th form button:hover {
+  color: var(--accent-color);
+}
+
+.mp-table th form button span.is-active {
+  color: var(--accent-color);
+}
+
+.mp-table td {
+  padding: 15px;
+  border-bottom: 1px solid #edf2f7;
+  vertical-align: middle;
+  color: var(--text-main);
+  font-size: 0.95rem;
+}
+
+.mp-cityName {
+  font-weight: 600;
+  color: var(--primary-color);
+}
+
+.mp-categoryImg {
+  width: 50px;
+  height: 50px;
+  object-fit: cover;
+  border-radius: 10px;
+  border: 1px solid #eee;
+  transition: transform 0.2s;
+}
+
+.mp-categoryImg:hover {
+  transform: scale(1.1);
+}
+
+.mp-tooltip {
+  position: relative;
+  cursor: help;
+  display: inline-block;
+  max-width: 200px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  color: var(--text-muted);
+}
+
+.mp-tooltip .mp-tooltip-text {
+  visibility: hidden;
+  width: 250px;
+  background-color: #2d3436;
+  color: #fff;
+  text-align: right;
+  border-radius: 8px;
+  padding: 12px;
+  position: absolute;
+  z-index: 100;
+  bottom: 125%;
+  left: 0;
+  opacity: 0;
+  transition: opacity 0.3s;
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+  white-space: normal;
+  font-size: 0.85rem;
+  line-height: 1.4;
+}
+
+.mp-tooltip:hover .mp-tooltip-text {
+  visibility: visible;
+  opacity: 1;
+}
+
+.mp-actionLink {
+  text-decoration: none;
+  color: var(--accent-color);
+  margin-right: 10px;
+  font-weight: 500;
+  font-size: 0.85rem;
+}
+
+.mp-actionLink:hover {
+  text-decoration: underline;
+}
+
+.mp-actionBtn.delete {
+  background: none;
+  border: none;
+  color: var(--danger-color);
+  cursor: pointer;
+  font-weight: 500;
+  font-size: 0.85rem;
+  padding: 0;
+}
+
+.mp-actionBtn.delete:hover {
+  text-decoration: underline;
+}
+
+/* ============================= */
+/* 11. Responsive (Mobile First) */
+/* ============================= */
+
+@media (max-width: 992px) {
+  .mp-table thead {
+    display: none;
+  }
+
+  .mp-table tbody tr {
+    display: block;
+    margin-bottom: 20px;
+    border: 1px solid #eee;
+    border-radius: 12px;
+    padding: 15px;
+    background: #fff;
+  }
+
+  .mp-table td {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    text-align: right;
+    padding: 10px 5px;
+    border-bottom: 1px solid #f9f9f9;
+  }
+
+  .mp-table td:last-child {
+    border-bottom: none;
+  }
+
+  .mp-table td::before {
+    content: attr(data-label);
+    font-weight: bold;
+    color: var(--text-muted);
+    font-size: 0.85rem;
+  }
+
+  .mp-table td:nth-of-type(1):before {
+    content: "Category Name:";
+  }
+  .mp-table td:nth-of-type(2):before {
+    content: "Description:";
+  }
+  .mp-table td:nth-of-type(3):before {
+    content: "Slug:";
+  }
+  .mp-table td:nth-of-type(4):before {
+    content: "Image:";
+  }
+  .mp-table td:nth-of-type(5):before {
+    content: "Actions:";
+  }
+
+  .mp-tooltip {
+    max-width: 150px;
+  }
+}
+
+@media (max-width: 480px) {
+  .mp-container {
+    padding: 15px;
+    width: 100%;
+    border-radius: 0;
+  }
+  .mp-searchBox {
+    max-width: 100%;
+  }
+}

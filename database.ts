@@ -1,44 +1,54 @@
 import { Collection, MongoClient, ObjectId } from "mongodb";
 import dotenv from "dotenv";
-import { City, Country, User } from "./types";
+import { Product, Category, User } from "./types";
+import { products } from "./products";
+import { categories } from "./categories";
 import bcrypt from "bcrypt";
 dotenv.config();
 
 export const MONGODB_URI = process.env.MONGODB_URI!;
 
 export const client = new MongoClient(MONGODB_URI as string);
+export const productsCollection = client
+  .db("shopDB")
+  .collection<Product>("products");
 
-export const citiesCollection : Collection<City> = client.db("worldDB").collection<City>("cities");
-export const countriesCollection : Collection<Country> = client.db("worldDB").collection<Country>("countries");
+export const categoriesCollection = client
+  .db("shopDB")
+  .collection<Category>("categories");
+
 export const userCollection: Collection<User> = client.db("worldDB").collection<User>("users");
 
 export async function addDataToDB() {
-    try{
-        const resCities = await fetch("https://raw.githubusercontent.com/ridhaak1/dataset-webontwekkeling/refs/heads/main/steden.json");
-        const cities = await resCities.json();
-        const countCities = await citiesCollection.countDocuments();
-        if (countCities === 0){
-           await citiesCollection.insertMany(cities);
-            console.log("Cities added in the database")
+    try {
+        // -------------------------
+        // 1️⃣ Categories
+        // -------------------------
+        const countCategories = await categoriesCollection.countDocuments();
+        if (countCategories === 0) {
+            await categoriesCollection.insertMany(categories);
+            console.log("✅ Categories added to DB");
         }
-         const resCountries = await fetch("https://raw.githubusercontent.com/ridhaak1/dataset-webontwekkeling/refs/heads/main/landen.json");
-        const countries = await resCountries.json();
-        const countContries = await countriesCollection.countDocuments();
-        if (countContries === 0){
-           await countriesCollection.insertMany(countries);
-            console.log("countries added in the database")
+
+        // -------------------------
+        // 2️⃣ Products
+        // -------------------------
+        const countProducts = await productsCollection.countDocuments();
+        if (countProducts === 0) {
+            await productsCollection.insertMany(products);
+            console.log("✅ Products added to DB");
         }
-    }catch (e){
-        console.log(e)
+    } catch (e) {
+        console.log("❌ Error adding initial data:", e);
     }
 }
 
-export async function updateCity(
-    id: string,
-    updatedCity: Partial<City>
+export async function updateProduct(
+    id: string | ObjectId,
+    updatedCity: Partial<Product>
 ) {
     try{
-        const result = await citiesCollection.updateOne(
+        const result = await productsCollection.updateOne(
             {_id: new ObjectId(id)},
             {$set: updatedCity}
         )
@@ -123,15 +133,13 @@ async function exit() {
 }
 
 export async function connect() {
-    try{
+    try {
         await client.connect();
-        await addDataToDB();
+        await addDataToDB();      
         await createInitialUser();
-        console.log("Connected to DB")
-        process.on("SIGINT", exit)
-    }catch(e){
-        console.log(e)
-    }finally{
-
-    }    
+        console.log("Connected to DB");
+        process.on("SIGINT", exit);
+    } catch(e) {
+        console.log(e);
+    }
 }

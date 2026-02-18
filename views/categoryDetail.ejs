@@ -1,0 +1,35 @@
+<%- include("partials/navbar") %>
+
+<div class="city-card-container">
+  <div class="city-card">
+    <div class="city-image-box">
+      <% if(category.imageUrl){ %>
+        <img src="<%= category.imageUrl %>" alt="<%= category.name %> Image">
+      <% } else { %>
+        <img src="https://placehold.co/400x300?text=No+Image" alt="No Image">
+      <% } %>
+    </div>
+    <div class="city-info">
+      <h1><%= category.name %></h1>
+      <p class="city-description"><%= category.description %></p>
+
+      <table class="city-table">
+        <tbody>
+          <tr><td>Slug</td><td class="sInfo"><%= category.slug %></td></tr>
+          <tr><td>Category ID</td><td class="sInfo"><%= category._id %></td></tr>
+        </tbody>
+      </table>
+
+      <% if(currentUser && currentUser.role === "ADMIN"){ %>
+        <div class="admin-actions">
+          <a class="mp-actionLink" href="/categories/edit/<%= category._id %>">Edit Category</a>
+          <form action="/categories/delete/<%= category._id %>" method="POST" style="display:inline;">
+              <button type="submit" class="mp-actionBtn delete">Delete</button>
+          </form>
+        </div>
+      <% } %>
+    </div>
+  </div>
+</div>
+
+<%- include("partials/footer") %>

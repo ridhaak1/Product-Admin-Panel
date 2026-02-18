@@ -1,0 +1,77 @@
+<%- include("partials/navbar") %>
+
+<main class="mp-container">
+
+  <form action="#" class="mp-searchBox">
+      <input class="mp-searchInput" type="search" name="search" value="<%= search || '' %>" placeholder="Search category 🔍">
+      <button class="mp-searchBtn" type="submit">🔍</button>
+  </form>
+
+  <table class="mp-table">
+      <thead>
+          <tr>
+              <th>
+                  <form method="get" action="">
+                      <input type="hidden" name="sortField" value="name">
+                      <input type="hidden" name="order" value="<%= (currentOrder === 'asc') ? 'desc' : 'asc' %>">
+                      <button type="submit">
+                          Name
+                          <span class="<%= (currentSort === 'name') ? 'is-active' : '' %>">
+                              <%= (currentOrder === 'asc') ? '▼' : '▲' %>
+                          </span>
+                      </button>
+                  </form>
+              </th>
+
+              <th>Description</th>
+              <th>Slug</th>
+              <th>Image</th>
+              <th>Action</th>
+          </tr>
+      </thead>
+
+      <tbody>
+          <% categories.forEach(cat => { %>
+          <tr>
+              <td>
+                  <span class="mp-cityName"><%= cat.name %></span>
+              </td>
+
+              <td>
+                  <div class="mp-tooltip">
+                      <%= cat.description %>
+                      <div class="mp-tooltip-text">
+                          <strong><%= cat.name %></strong><br>
+                          <%= cat.description %>
+                      </div>
+                  </div>
+              </td>
+
+              <td><%= cat.slug %></td>
+
+              <td>
+                  <% if(cat.imageUrl){ %>
+                      <img src="<%= cat.imageUrl %>" class="mp-categoryImg" alt="<%= cat.name %>">
+                  <% } else { %>
+                      N/A
+                  <% } %>
+              </td>
+
+              <td>
+                  <a class="mp-actionLink" href="/categories/details/<%= cat._id %>">
+                      View details
+                  </a>
+                  <% if(currentUser && currentUser.role === "ADMIN"){ %>
+                      <form action="/categories/delete/<%= cat._id %>" method="POST" style="display:inline;">
+                          <button type="submit" class="mp-actionBtn delete">Delete</button>
+                      </form>
+                  <% } %>
+              </td>
+          </tr>
+          <% }) %>
+      </tbody>
+  </table>
+
+</main>
+
+<%- include("partials/footer") %>
