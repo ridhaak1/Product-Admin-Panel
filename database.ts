@@ -68,12 +68,12 @@ async function createInitialUser() {
 
 export async function registerUser(email: string, password: string) {
   if (!email || !password) {
-    throw new Error("Alle velden zijn verplicht");
+    throw new Error("All fields are required");
   }
 
   const existingUser = await userCollection.findOne({ email });
   if (existingUser) {
-    throw new Error("Gebruiker bestaat al");
+    throw new Error("User already exists");
   }
 
   const hashedPassword = await bcrypt.hash(password, 10);
@@ -87,17 +87,17 @@ export async function registerUser(email: string, password: string) {
 
 export async function login(email: string, password: string) {
   if (email === "" || password === "") {
-    throw new Error("E-mailadres en wachtwoord zijn verplicht");
+    throw new Error("Email and password are required");
   }
   let user: User | null = await userCollection.findOne<User>({ email: email });
   if (user) {
     if (await bcrypt.compare(password, user.password!)) {
       return user;
     } else {
-      throw new Error("Wachtwoord is onjuist");
+      throw new Error("Incorrect password");
     }
   } else {
-    throw new Error("Gebruiker niet gevonden");
+    throw new Error("User not found");
   }
 }
 
