@@ -11,7 +11,7 @@ import session from "./session";
 import { secureMiddleware, flashMiddleware } from "./middlewares/middlewares";
 
 const app = express();
-
+const PORT = process.env.PORT || 3000;
 app.use(session);
 app.use(flashMiddleware);
 app.use(express.urlencoded({ extended: true }));
@@ -44,10 +44,11 @@ app.get("/", (req, res) => {
 // ---------------------
 // START SERVER
 // ---------------------
-app.listen(process.env.port, async () => {
+
+app.listen(PORT, async () => {
   try {
     await connect();
-    console.log("Server started on http://localhost:" + process.env.port);
+    console.log("Server started on port " + PORT);
   } catch (e) {
     console.log(e);
     process.exit(1);

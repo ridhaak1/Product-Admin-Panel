@@ -4,7 +4,9 @@
   "description": "## Installation",
   "main": "index.js",
   "scripts": {
-    "start": "nodemon app.ts"
+    "build": "tsc",
+    "start": "node app.js",
+    "dev": "nodemon app.ts"
   },
   "dependencies": {
     "bcrypt": "^6.0.0",
