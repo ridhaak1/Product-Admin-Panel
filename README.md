@@ -1,95 +1,34 @@
-## Ridha Alkhaykanee
+# 📦 Product Admin Panel
 
-# Webontwikkeling Project – Authenticatie & Rollen
+A lightweight, high-performance dashboard designed for seamless product management. This application features a robust role-based access system, allowing users to browse products and Admins to manage the entire inventory effortlessly.
 
-## 📌 Beschrijving
-Dit project is een webapplicatie gebouwd met **Node.js, Express, MongoDB en EJS**.  
-De applicatie bevat een volledig **authenticatiesysteem** met gebruikersrollen (**ADMIN** en **USER**).
-
-Gebruikers kunnen zich registreren, inloggen en uitloggen.  
-De toegang tot pagina’s en functionaliteiten is beveiligd op basis van de loginstatus en rol van de gebruiker.
+🚀 **[Live Demo](https://product-admin-panel-m35e.onrender.com)**
 
 ---
 
-## 🚀 Functionaliteiten
+## 🔑 Demo Credentials
 
-### 👤 Gebruikers & Rollen
-- Bij het opstarten van de applicatie worden **twee default gebruikers** toegevoegd:
-  - **Admin gebruiker** met rol `ADMIN`
-  - **Normale gebruiker** met rol `USER`
-- Wachtwoorden worden **veilig opgeslagen met bcrypt**
-
----
-
-### 🔐 Login
-- Iedereen heeft toegang tot de **login pagina**
-- De login pagina bevat:
-  - Input veld voor username/email
-  - Input veld voor password
-  - Login knop
-- Na een succesvolle login:
-  - De gebruiker wordt doorgestuurd naar het **dashboard**
-- Als een gebruiker al is ingelogd:
-  - Kan hij de login pagina niet meer bezoeken
-  - Wordt hij automatisch doorgestuurd naar het dashboard
+| Role | Username / Email | Password |
+| :--- | :--- | :--- |
+| **Admin** | `ridha@ap.be` | `ridha` |
+| **User** | `user` | `user123` |
 
 ---
 
-### 🧾 Registratie
-- Gebruikers kunnen zich registreren via een **register pagina**
-- De pagina bevat:
-  - Username/email
-  - Password
-- Validaties:
-  - Gebruikersnaam mag niet al bestaan
-  - Wachtwoord wordt gehasht met bcrypt
-- Na registratie wordt de gebruiker doorgestuurd naar de login pagina
+## ✨ Key Features
 
----
+### 🔍 Discovery & Navigation
+* **Smart Search:** Find products instantly by name.
+* **Advanced Filtering:** Browse products by category.
+* **Dynamic Sorting:** Organize by **Name, Price, Stock, or Discount**.
+* **Visual Gallery:** Clean display of product images and descriptions.
 
-### 📊 Dashboard
-- Het dashboard is **alleen toegankelijk voor ingelogde gebruikers**
-- Niet ingelogd → redirect naar login pagina
+### 🔐 Admin Capabilities (CRUD)
+* **Create:** Add new products to the inventory.
+* **Read:** Access detailed product data.
+* **Update:** Edit product details, pricing, and stock levels.
+* **Delete:** Remove outdated or out-of-stock items.
 
-#### ADMIN
-- Kan de **edit button** zien
-- Heeft toegang tot edit functionaliteiten
-
-#### USER
-- Ziet de edit button niet
-- Heeft geen toegang tot admin-pagina’s
-
----
-
-### 🔒 Beveiliging
-- Sessies worden gebruikt voor authenticatie
-- Beveiligde routes met middleware
-- Rol-gebaseerde toegang (ADMIN / USER)
-- Flash messages voor fout- en succesmeldingen
-
----
-
-### 🚪 Logout
-- Ingelogde gebruikers kunnen uitloggen via een **logout knop**
-- Na logout:
-  - De sessie wordt vernietigd
-  - De gebruiker wordt doorgestuurd naar de login pagina
-
----
-
-## 🛠️ Gebruikte Technologieën
-- Node.js
-- Express
-- MongoDB
-- EJS
-- TypeScript
-- bcrypt
-- express-session
-
----
-
-## 📁 Installatie & Gebruik
-
-1. Installeer de dependencies:
+1. **Clone the repository:**
    ```bash
-   npm install
+   git clone [https://github.com/your-username/product-admin-panel.git](https://github.com/your-username/product-admin-panel.git)
