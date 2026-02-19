@@ -32,28 +32,6 @@ exports.categoriesCollection = exports.client
 exports.userCollection = exports.client
     .db("worldDB")
     .collection("users");
-// export async function addDataToDB() {
-//     try {
-//         // -------------------------
-//         // 1️⃣ Categories
-//         // -------------------------
-//         const countCategories = await categoriesCollection.countDocuments();
-//         if (countCategories === 0) {
-//             await categoriesCollection.insertMany(categories);
-//             console.log("✅ Categories added to DB");
-//         }
-//         // -------------------------
-//         // 2️⃣ Products
-//         // -------------------------
-//         const countProducts = await productsCollection.countDocuments();
-//         if (countProducts === 0) {
-//             await productsCollection.insertMany(products);
-//             console.log("✅ Products added to DB");
-//         }
-//     } catch (e) {
-//         console.log("❌ Error adding initial data:", e);
-//     }
-// }
 function updateProduct(id, updatedCity) {
     return __awaiter(this, void 0, void 0, function* () {
         try {
@@ -144,7 +122,6 @@ function connect() {
     return __awaiter(this, void 0, void 0, function* () {
         try {
             yield exports.client.connect();
-            // await addDataToDB();
             yield createInitialUser();
             console.log("Connected to DB");
             process.on("SIGINT", exit);

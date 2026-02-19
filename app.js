@@ -24,6 +24,7 @@ const database_1 = require("./database");
 const session_1 = __importDefault(require("./session"));
 const middlewares_1 = require("./middlewares/middlewares");
 const app = (0, express_1.default)();
+const PORT = process.env.PORT || 3000;
 app.use(session_1.default);
 app.use(middlewares_1.flashMiddleware);
 app.use(express_1.default.urlencoded({ extended: true }));
@@ -51,10 +52,10 @@ app.get("/", (req, res) => {
 // ---------------------
 // START SERVER
 // ---------------------
-app.listen(process.env.port, () => __awaiter(void 0, void 0, void 0, function* () {
+app.listen(PORT, () => __awaiter(void 0, void 0, void 0, function* () {
     try {
         yield (0, database_1.connect)();
-        console.log("Server started on http://localhost:" + process.env.port);
+        console.log("Server started on port " + PORT);
     }
     catch (e) {
         console.log(e);
